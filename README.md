@@ -1,9 +1,35 @@
 
-## Data Engineering project AWS
+# AWS Data Pipeline Project
 
-In this project, we're developing an AWS-based data pipeline utilizing airflow, python, spark, and AWS services. The objective is to extract Weather Data from OpenWeather, subsequently store it in S3, and ultimately load it into Redshift using the Airflow platform. The project's high-level architecture is as follows:
+## Overview
+This project involves the development of an AWS-based data pipeline using Airflow, Python, Spark, and AWS services. The aim is to extract Weather Data from OpenWeather, store it in S3, and load it into Redshift using Airflow.
 
-![alt text](https://github.com/AnandDedha/aws-airflow-dataengineering-pipeline/blob/main/High%20Level%20Infra.drawio.png)
+
+https://github.com/SiddharthUchil/data-engineering-airflow-aws/assets/36127139/0e7f1faa-03eb-4c49-9f0c-15060b3c939d
+
+
+![alt text](https://github.com/SiddharthUchil/data-engineering-airflow-aws/blob/main/High%20Level%20Infra.drawio.png)
+
+
+## Architecture
+The project's architecture is constructed using Infrastructure as Code (IAC) methodologies, with two main Airflow DAGs configured for the workflow.
+
+### First Airflow DAG: Data Acquisition and Storage
+This DAG handles the extraction of weather data from the OpenWeather API and its storage in an S3 bucket.
+
+#### Tasks
+- **Extract Data from OpenWeather API**: Utilizes a Python operator to retrieve weather data using the "requests" library.
+- **Store Data in S3**: Structures the extracted data into a dataframe and stores it in an S3 bucket using the S3CreateObjectOperator.
+
+### Second Airflow DAG: Data Transformation and Loading
+This DAG is responsible for extracting data from S3, transforming it, and loading it into Redshift.
+
+#### Tasks
+- **Sync Check**: Ensures the completion of the first DAG's tasks before proceeding.
+- **ETL to Redshift**: Employs GlueContext and Spark context for ETL processes, loading the transformed data into Redshift.
+
+## Conclusion
+The pipeline facilitates the automated extraction, storage, and loading of weather data into Redshift, leveraging the integration of Apache Airflow and Glue operators for routine updates.
 
 We've established the entire architecture through infrastructure as code (IAC) methodologies. Following that, we've configured two separate Airflow DAGs.
 
